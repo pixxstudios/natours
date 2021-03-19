@@ -5,18 +5,20 @@ const app: Application = express();
 // middleware
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
+const getAllTours = (req: Request, res: Response) => {
     res.status(200).json({ message: "hello from ts" });
-});
+}
+// app.get('/api/v1/tours', getAllTours);
 
-app.get('/api/v1/tours', (req: Request, res: Response) => {
-    res.status(200).json({ message: "all tours info" });
-});
-
-app.post('/api/v1/tours', (req: Request, res: Response) => {
+const createTour = (req: Request, res: Response) => {
     console.log('>>> ', req.body);
     res.status(200).send("Updated");
-});
+}
+// app.post('/api/v1/tours', createTour);
+
+app.route('/api/v1/tours')
+.get(getAllTours)
+.post(createTour);
 
 const PORT: number = 3000;
 app.listen(PORT, () => {

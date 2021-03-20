@@ -1,8 +1,10 @@
 import express, { Request, Response, Application } from 'express';
+import morgan from 'morgan';
 
 const app: Application = express();
 
 // middleware
+app.use(morgan('dev'));
 app.use(express.json());
 
 const getAllTours = (req: Request, res: Response) => {

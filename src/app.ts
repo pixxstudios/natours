@@ -7,6 +7,7 @@ const app: Application = express();
 // middleware
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.static(`${__dirname}/../public`));
 
 // tours
 app.use('/api/v1/tours', tourRouter);

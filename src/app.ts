@@ -1,4 +1,4 @@
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response, Application, Router } from 'express';
 import morgan from 'morgan';
 
 const app: Application = express();
@@ -7,18 +7,20 @@ const app: Application = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
+// tours
+const tourRouter = Router();
+app.use('/api/v1/tours', tourRouter);
+
 const getAllTours = (req: Request, res: Response) => {
     res.status(200).json({ message: "hello from ts" });
 }
-// app.get('/api/v1/tours', getAllTours);
 
 const createTour = (req: Request, res: Response) => {
     console.log('>>> ', req.body);
     res.status(200).send("Updated");
 }
-// app.post('/api/v1/tours', createTour);
 
-app.route('/api/v1/tours')
+tourRouter.route('/')
 .get(getAllTours)
 .post(createTour);
 

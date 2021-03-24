@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import { getAllTours, createTour, getTour, checkBody } from '../controllers/tourController';
-const tourRouter = Router();
+import Tours from '../models/tourModel';
 
-tourRouter.param('id', (req, res, next, val) => {
-    console.log('id ', val);
-    next();
-});
+const tourRouter = Router();
 
 tourRouter.route('/')
 .get(getAllTours)

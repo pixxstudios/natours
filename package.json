@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "12.13.1"
+  },
   "scripts": {
     "start": "nodemon dist/server.js",
     "start:prod": "NODE_ENV=production nodemon dist/server.js"

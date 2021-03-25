@@ -9,6 +9,6 @@ tourRouter.route('/')
 
 tourRouter.route('/:id')
 .get(getTour)
-.post(updateTour);
+.patch(updateTour);
 
 export default tourRouter;

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllTours, createTour, getTour } from '../controllers/tourController';
+import { getAllTours, createTour, getTour, updateTour } from '../controllers/tourController';
 
 const tourRouter = Router();
 
@@ -8,6 +8,7 @@ tourRouter.route('/')
 .post(createTour);
 
 tourRouter.route('/:id')
-.get(getTour);
+.get(getTour)
+.post(updateTour);
 
 export default tourRouter;

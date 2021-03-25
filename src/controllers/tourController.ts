@@ -1,6 +1,41 @@
 import { Request, Response, NextFunction } from 'express';
 import Tours from '../models/tourModel';
 
+export const createTour = async (req: Request, res: Response) => {
+    try {
+        const newTour = await Tours.create(req.body);
+        res.status(201).json({
+            status: 'Success',
+            data: {
+                tour: newTour
+            }
+        });
+    } catch(err) {
+        res.status(400).json({
+            status: 'Fail',
+            message: 'Invalid data sent'
+        });
+    }
+}
+
+export const getTour = async (req: Request, res: Response) => {
+    try {
+        await Tours.findById(req.params.id).then(tour => {
+            res.status(400).json({
+                message: 'Success',
+                data: {
+                    tour
+                }
+            });
+        })
+    } catch(err) {
+        res.status(404).json({
+            message: 'Error retreiving tour',
+            data: err
+        });
+    }
+}
+
 export const getAllTours = async (req: Request, res: Response) => {
     try {
         await Tours.find().then(tours => {
@@ -19,23 +54,22 @@ export const getAllTours = async (req: Request, res: Response) => {
     }
 };
 
-export const createTour = async (req: Request, res: Response) => {
+export const updateTour = async (req: Request, res: Response) => {
     try {
-        const newTour = await Tours.create(req.body);
+        const tour = await Tours.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
         res.status(201).json({
             status: 'Success',
             data: {
-                tour: newTour
+                tour
             }
         });
     } catch(err) {
         res.status(400).json({
             status: 'Fail',
-            message: 'Invalid data sent'
+            message: err
         });
     }
-}
-
-export const getTour = (req: Request, res: Response) => {
-    res.status(200).send('tour');
 }

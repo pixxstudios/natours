@@ -4,7 +4,7 @@ import Tours from '../models/tourModel';
 export const getAllTours = async (req: Request, res: Response) => {
     await Tours.find().then(tours => {
         res.status(200).json({
-            message: "Success",
+            message: "Success!",
             data: {
                 tours
             }

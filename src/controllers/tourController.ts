@@ -73,3 +73,21 @@ export const updateTour = async (req: Request, res: Response) => {
         });
     }
 }
+
+export const deleteTour = async (req: Request,  res: Response) => {
+    try {
+        const tour = await Tours.deleteOne({ _id: req.params.id });
+
+        res.status(200).json({
+            message: 'Success',
+            data: {
+                tour
+            }
+        });
+    } catch(err) {
+        res.status(404).json({
+            message: 'Failed',
+            data: err
+        });
+    }
+};

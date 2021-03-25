@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllTours, createTour, getTour, updateTour } from '../controllers/tourController';
+import { getAllTours, createTour, getTour, updateTour, deleteTour } from '../controllers/tourController';
 
 const tourRouter = Router();
 
@@ -9,6 +9,7 @@ tourRouter.route('/')
 
 tourRouter.route('/:id')
 .get(getTour)
-.patch(updateTour);
+.patch(updateTour)
+.delete(deleteTour);
 
 export default tourRouter;

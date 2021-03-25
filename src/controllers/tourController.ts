@@ -2,14 +2,22 @@ import { Request, Response, NextFunction } from 'express';
 import Tours from '../models/tourModel';
 
 export const getAllTours = async (req: Request, res: Response) => {
-    await Tours.find().then(tours => {
+    try {
+        await Tours.find().then(tours => {
         res.status(200).json({
             message: "Success!",
             data: {
                 tours
             }
+        })
     })
-})};
+    } catch (err) {
+        res.status(404).json({
+            message: 'Error',
+            data: err
+        });
+    }
+};
 
 export const createTour = async (req: Request, res: Response) => {
     try {
